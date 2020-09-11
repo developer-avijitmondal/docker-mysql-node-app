@@ -1,0 +1,784 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Backend API",
+      "description": "This is Backend API.",
+      "version": "1.0.0"
+    },
+    "basePath":"/",
+    "schemes": [
+      "http"
+    ],
+    "securityDefinitions":{
+      "bearerAuth":{
+        "type":"apiKey",
+        "name":"Authorization",
+        "scheme":"Bearer",
+        "in":"header",
+        "description": "For accessing the API a valid JWT token must be passed in all the queries in the 'Authorization' header"
+      }
+
+    },
+    "paths": {
+      "/api/v1/businessunitgroups": {
+          "get": {
+            "tags": [
+              "businessunitgroups"
+            ],
+            "consumes":"application/json",
+            "produces":"application/json",
+            "security":[
+              {
+                "bearerAuth":[]
+              }
+            ],
+            "summary": "Get list of businessunitgroups",
+            "operationId": "businessunitgroups",
+            "parameters": [
+              {
+                "name": "limit",
+                "in": "query",
+                "description": "Number of results to return per page.",
+                "required": false,
+                "type": "integer"
+              },
+              {
+                  "name": "offset",
+                  "in": "query",
+                  "description": "The initial index from which to return the results.",
+                  "required": false,
+                  "type": "integer"
+              }
+            ],
+            "responses": {
+              "200": {
+                "schema": {
+                  "$ref": "#/definitions/Businessunitgroups",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "post": {
+            "tags": [
+              "businessunitgroups"
+            ],
+            "consumes":"application/json",
+            "produces":"application/json",
+            "security":[
+              {
+                "bearerAuth":[]
+              }
+            ],
+            "summary": "Create a businessunitgroups",
+            "operationId": "create businessunitgroups",
+            "parameters": [
+              {
+                "name": "data",
+                "in": "body",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/BusinessunitgroupsPost"
+                }
+              }
+            ],
+            "responses": {
+              "201": {
+                "schema": {
+                  "$ref": "#/definitions/Businessunitgroups"
+                }
+              },
+              "400": {
+                "schema": {
+                  "$ref": "#/definitions/Error"
+                }
+              }
+            }
+          }
+      }
+    },
+    "responses":{
+      "NotFound":{
+        "description":"The specified resource was not found"
+      }
+    },
+    "definitions": { 
+      "EmployeeoperatorRegister":{
+        "type":"object",
+        "properties":{
+        "id":{"type":"number"},
+        "username":{"type":"string"},
+        "password":{"type":"string"},
+        "userid":{"type":"number"}
+      }},
+      "Currency":{
+        "type":"object",
+        "properties":{
+          "symbol":{"type":"string"},
+          "name":{"type":"string"},
+          "symbolnative":{"type":"string"}
+        }
+      },
+      "EmployeeoperatorLogin":{
+        "type":"object",
+        "properties":{
+        "username":{"type":"string"},
+        "password":{"type":"string"}
+      }},
+      "AuthRegister":{
+        "type":"object",
+        "properties":{
+        
+          "password":{"type":"string"},
+          "last_login":{"type":"string"},
+          "is_superuser":{"type":"boolean"},
+          "username":{"type":"string"},
+          "first_name":{"type":"string"},
+          "last_name":{"type":"string"},
+          "email":{"type":"string"},
+          "is_staff":{"type":"boolean"},
+          "is_active":{"type":"boolean"},
+          "date_joined":{"type":"string"}
+      }},
+          
+      "AuthLogin":{
+            "type":"object",
+            "properties":{
+            "email":{"type":"string"},
+            "username":{"type":"string"},
+            "password":{"type":"string"}
+          }},
+          
+          "AuthResetpassword":{
+            "type":"object",
+            "properties":{"email":{"type":"string"}
+            }},
+          "AuthResetpasswordconfirm":{
+            "type":"object",
+            "properties":
+            {"token":{"type":"string"},
+          
+            "confirmpassword":{"type":"string"}
+          }},
+          "AuthUpdateuser":{
+            "type":"object",
+            "properties":
+            {
+              "username":{"type":"string"},
+              "email":{"type":"string"},
+              "first_name":{"type":"string"},
+              "last_name":{"type":"string"}
+              }},
+          "Register":{
+        "type":"object",
+        "properties":{
+        "id":{"type":"number"},
+        "username":{"type":"string"},
+        "password":{"type":"string"},
+        "userid":{"type":"number"}
+        }
+      },
+      "Login":{
+        "type":"object",
+        "properties":{
+        "username":{"type":"string"},
+        "password":{"type":"string"}
+        }
+      },
+      "UserDto": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Frachise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "franchisename": {
+            "type": "string"
+          },
+          "typecode": {
+            "type": "string"
+          },
+          "franchisestatus": {
+            "type": "string"
+          },
+          "franchiseimage": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "businessunitgroup_id":{
+            "type": "integer"
+          },
+          "franchisetype_id":{
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "FrachiseType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "FrachiseTypePost": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          }
+        }
+      },
+      "FrachisePost": {
+          "type": "object",
+          "properties": {
+            "franchisename": {
+              "type": "string"
+            },
+            "typecode": {
+              "type": "string"
+            },
+            "franchisestatus": {
+              "type": "string"
+            },
+            "franchiseimage": {
+              "type": "string"
+            },
+            "createdby": {
+              "type": "integer"
+            },
+            "updatedby": {
+              "type": "integer"
+            },
+            "businessunitgroup_id":{
+              "type": "integer"
+            },
+            "franchisetype_id":{
+              "type": "integer"
+            }
+          }
+      },
+      "Businessunitgroups": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "businessunitgroupname": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "BusinessunitgroupsPost": {
+        "type": "object",
+        "properties": {
+          "businessunitgroupname": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          }
+        }
+      },
+      "Departments": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "DepartmentsPost": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          }
+        }
+      },
+      "Office": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "officename": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "string"
+          },
+          "phonenumber": {
+            "type": "string"
+          },
+          "officeimage": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "country_id": {
+            "type": "integer"
+          },
+          "state_id": {
+            "type": "integer"
+          },
+          "city":{
+            "type": "string"
+          },
+          "setting":{
+            "type": "string"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "OfficePost": {
+        "type": "object",
+        "properties": {
+          "officename": {
+            "type": "string"
+          },
+          "address1": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "zipcode": {
+            "type": "string"
+          },
+          "phonenumber": {
+            "type": "string"
+          },
+          "officeimage": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "country_id": {
+            "type": "integer"
+          },
+          "state_id": {
+            "type": "integer"
+          },
+          "city":{
+            "type": "string"
+          },
+          "setting":{
+            "type": "string"
+          }
+        }
+      },
+      "Partyrole": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "partyroletypecode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "PartyrolePost": {
+        "type": "object",
+        "properties": {
+          "partyroletypecode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createby": {
+            "type": "integer"
+          },
+          "updateby": {
+            "type": "integer"
+          }
+        }
+      },
+      "Partytype": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "partytypecode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "partytypedescription": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          },
+          "createdAt":{
+            "type": "string"
+          },
+          "updatedAt":{
+            "type": "string"
+          }
+        }
+      },
+      "PartytypePost": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "partytypecode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "partytypedescription": {
+            "type": "string"
+          },
+          "createdby": {
+            "type": "integer"
+          },
+          "updatedby": {
+            "type": "integer"
+          }
+        }
+      }, 
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "effectivedatatime": {
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          },
+          "expirationdatetime": {
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          },
+          "address_id": {
+            "type": "integer"
+          },
+          "contactmethodtype_id": {
+            "type": "integer"
+          },
+          "contactperposetype_id": {
+            "type": "integer"
+          },
+          "emailaddress_id":{
+            "type": "string"
+          },
+          "partyroleassigment_id":{
+            "type": "string"
+          },
+          "telephone_id":{
+            "type": "string"
+          },
+          "website_id":{
+            "type": "string"
+          },
+          "contact_id":{
+            "type": "string"
+          }
+        }
+      },
+      "EmployeePost": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "effectivedatatime": {
+            "type": "string",
+            "format": "date-time",
+            "required": true 
+          },
+          "expirationdatetime": {
+            "type": "string",
+            "format": "date-time",
+            "required": true
+          },
+          "address_id": {
+            "type": "integer"
+          },
+          "contactmethodtype_id": {
+            "type": "integer"
+          },
+          "contactperposetype_id": {
+            "type": "integer"
+          },
+          "emailaddress_id": {
+            "type": "integer"
+          },
+          "partyroleassigment_id": {
+            "type": "integer"
+          },
+          "telephone_id": {
+            "type": "integer"
+          },
+          "website_id": {
+            "type": "integer"
+          },
+          "contact_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "Contactmethodtype": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "contactmethodtypecode": {
+          "type": "string"
+        },
+        "contactmethodname": {
+          "type": "string"
+        }
+      }
+      },
+      "ContactmethodtypePost": {
+      "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "contactmethodtypecode": {
+            "type": "string"
+          },
+          "contactmethodname": {
+            "type": "string"
+          }
+        }
+      },
+      "Contactpurposetype": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "contactpurposetypecode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ContactpurposetypePost": {
+        "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "contactpurposetypecode": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Deleted": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UnauthorizedError":{
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }

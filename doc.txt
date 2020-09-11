@@ -1,0 +1,3 @@
+docker exec -it [a37]  sh
+
+npx sequelize db:migrate  
